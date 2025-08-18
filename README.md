@@ -1,7 +1,5 @@
 # FishGDPS' GMDPrivateServer
-> Fork of GMDPrivateServer for FishGDPS
-
-Differences from GMDPrivateServer are found [here](docs/differences.md)
+**Fork of GMDPrivateServer for FishGDPS**
 
 Supported version of Geometry Dash: 1.0 - 1.5, 1.5 is recommended
 
@@ -11,8 +9,7 @@ Required version of PHP: 8.0+
 1. Upload the files on a webserver
 2. Import database.sql into a MySQL/MariaDB database
 3. Edit the links in the lib files in your Geometry Dash 1.5 APK
-#### Optional steps:
-- Modify the password used in the rate tool at `/incl/misc/rateToolPassword.php`
+4. Modify the password used in logging in at `/incl/misc/rateToolPassword.php`. Default password is `123456`
 
 ### Credits
 
@@ -29,3 +26,5 @@ Most of the stuff in generateHash.php has been figured out by pavlukivan and Ita
 Demon, auto, and star/feature/epic rating support in the rate tool by CirnoTheUwU
 
 Using this for the website - https://www.w3schools.com/w3css/default.asp (w3.css)
+
+Nano56 for basically everything
