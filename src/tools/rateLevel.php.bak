@@ -1,0 +1,67 @@
+<?php
+include "../incl/lib/connection.php";
+require_once "../incl/lib/mainLib.php";
+$gs = new mainLib();
+
+if(!empty($_POST["levelID"]) AND !empty($_POST["stars"]) AND !empty($_POST["difficulty"])){
+   require "../incl/misc/rateToolPassword.php";
+   if ($_POST["password"] != $rateToolPassword){
+       exit("Invalid password");
+   }
+	$levelID = ($_POST["levelID"]);
+	$stars = ($_POST["stars"]);
+   $difficulty  = ($_POST["difficulty"]);
+    $rfe  = ($_POST["rfe"]);
+    $sa  = ($_POST["sa"]);
+        $sd  = ($_POST["sd"]);
+
+   $query = $db->prepare("UPDATE levels SET starDemon = $sd, starAuto = $sa, starFeatured = $rfe, starStars = $stars, starDifficulty = $difficulty WHERE levels.levelID = $levelID");
+	$query->execute();
+   echo "Level rated!";
+}else{
+	echo '<form action="rateLevel.php" method="post"> <label for="levelID">Level ID:</label>
+		<input type="text" id="levelID" name="levelID" placeholder="Level ID" required><br>
+		<label for="stars">Number of Stars:</label>
+<select name="stars" id="stars">
+ <option value="00">0</option>
+ <option value="1">1</option>
+ <option value="2">2</option>
+ <option value="3">3</option>
+ <option value="4">4</option>
+ <option value="5">5</option>
+ <option value="6">6</option>
+ <option value="7">7</option>
+ <option value="8">8</option>
+ <option value="9">9</option>
+ <option value="10">10</option>
+</select><br>
+		<label for="difficulty">Difficulty face:</label>
+<select name="difficulty" id="difficulty">
+ <option value="00">N/A</option>
+ <option value="10">Easy</option>
+ <option value="20">Normal</option>
+ <option value="30">Hard</option>
+ <option value="40">Harder</option>
+ <option value="50">Insane/Demon</option>
+</select><br>
+	<label for="rfe">Feature?:</label>
+<select name="rfe" id="rfe">
+ <option value="0">R/X</option>
+ <option value="1">F</option>
+ <option value="2">E</option>
+</select><br>
+		<label for="sa">Auto [USE ONLY WITH STARS = 1]:</label>
+<select name="sa" id="sa">
+ <option value="0">N</option>
+ <option value="1">Y</option>
+</select><br>
+			<label for="sd">Demon [DIFFICULTY FACE MUST BE INSANE OR SHIT WILL BREAK]:</label>
+<select name="sd" id="sd">
+ <option value="0">N</option>
+ <option value="1">Y</option>
+</select><br>
+<label for="levelID">Password:</label>
+		<input type="password" id="password" name="password" placeholder="Password" required><br>
+		<input type="submit" value="Submit" /></form>';
+}
+?>

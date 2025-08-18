@@ -6,8 +6,8 @@ Supported version of Geometry Dash: 1.0 - 1.5, 1.5 is recommended
 Required version of PHP: 8.0+
 
 ### Setup
-1. Upload the files on a webserver
-2. Import database.sql into a MySQL/MariaDB database
+1. Upload the files from `src/` on a webserver
+2. Import `/database.sql` into a MySQL/MariaDB database
 3. Edit the links in the lib files in your Geometry Dash 1.5 APK
 4. Modify the password used in logging in at `/incl/misc/rateToolPassword.php`. Default password is `123456`
 
