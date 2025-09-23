@@ -1,3 +1,7 @@
+This project has been **archived**. There won't be any more updates to this repository due to FishGDPS shutting down.
+
+R.I.P FishGDPS, i guess (2025-2025)
+------
 # FishGDPS' GMDPrivateServer
 **Fork of GMDPrivateServer for FishGDPS**
 
