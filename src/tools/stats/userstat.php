@@ -48,7 +48,7 @@
     $query->execute();
     $color2 = $query->fetchColumn();
       
-      $iconLink = "<img height=\"48\" src=\"https://gdicon.oat.zone/icon.png?type=cube&value=$icon&color1=$color1&color2=$color2\">";
+      $iconLink = "<img height=\"48\" src=\"https://icons.gcs.skin/icon.png?type=cube&value=$icon&color1=$color1&color2=$color2\">";
       
       # return stats to the user
       echo "<h1>$iconLink $userName</h1>";

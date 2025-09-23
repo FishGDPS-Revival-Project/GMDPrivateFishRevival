@@ -33,7 +33,7 @@ foreach($result as &$gain){
     $color2 = $query->fetchColumn();
     
 	$x++;
-	echo "<tr><td>$x</td><td><img height=\"16\" src=\"https://gdicon.oat.zone/icon.png?type=cube&value=$icon&color1=$color1&color2=$color2\"> <a href=\"http://system32.141412.xyz/db/tools/stats/userstat.php?userID=${gain['userID']}\">${gain['userName']}</a></td><td>${gain['stars']}</td><td>${gain['demons']}</td><td>${gain['creatorPoints']}</td><td><code>${gain['userID']}</code></td></tr>";
+	echo "<tr><td>$x</td><td><img height=\"16\" src=\"https://icons.gcs.skin/icon.png?type=cube&value=$icon&color1=$color1&color2=$color2\"> <a href=\"http://system32.141412.xyz/db/tools/stats/userstat.php?userID=${gain['userID']}\">${gain['userName']}</a></td><td>${gain['stars']}</td><td>${gain['demons']}</td><td>${gain['creatorPoints']}</td><td><code>${gain['userID']}</code></td></tr>";
 }
 ?>
 </table>

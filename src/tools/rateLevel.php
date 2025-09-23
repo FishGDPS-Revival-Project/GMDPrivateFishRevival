@@ -173,7 +173,7 @@ if (!$admin) {
     }
 
     # difficultiy thumbnails
-    # credit to https://gcs.icu/WTFIcons/difficulties
+    # credit to https://gcs.skin/WTFIcons/difficulties
 
     # for the link
     switch ($rfe) {
@@ -232,7 +232,7 @@ if (!$admin) {
     }
 
     # link format
-    $difficultiesURL = 'https://gcs.icu/WTFIcons/difficulties/';
+    $difficultiesURL = 'https://gcs.skin/WTFIcons/difficulties/';
     $gldi = $difficultiesURL.$starsIcon.'/'.$diffIcon.'.png';
 
     # rate the level
@@ -283,7 +283,7 @@ if (!$admin) {
     $rateWebhook = $dw
     ->newMessage()
     ->setContent("<@&1371201055609589790>") # @New Rates role in FishGDPS, replace this with your role
-    ->setAuthor("$nrUsername", "", "https://gdicon.oat.zone/icon.png?type=cube&value=$nrIcon&color1=$nrColor1&color2=$nrColor2")
+    ->setAuthor("$nrUsername", "", "https://icons.gcs.skin/icon.png?type=cube&value=$nrIcon&color1=$nrColor1&color2=$nrColor2")
     ->setDescription($dwdescription)
     ->setColor($dwcolor)
     ->setThumbnail($gldi)

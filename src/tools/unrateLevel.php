@@ -84,14 +84,14 @@ if (!empty($_POST["levelID"])) {
   include "cron/fixcps.php";
   echo '</div>';
 
-    $difficultiesURL = 'https://gcs.icu/WTFIcons/difficulties/';
+    $difficultiesURL = 'https://gcs.skin/WTFIcons/difficulties/';
     $gldi = $difficultiesURL.'stars'.'/'.'na'.'.png';
 
     $dw = new discordWebhook($rateWebhook);
     $rateWebhook = $dw
             ->newMessage()
             ->setContent("<@&1371201055609589790>")
-            ->setAuthor("$nrUsername", "", "https://gdicon.oat.zone/icon.png?type=cube&value=$nrIcon&color1=$nrColor1&color2=$nrColor2")
+            ->setAuthor("$nrUsername", "", "https://icons.gcs.skin/icon.png?type=cube&value=$nrIcon&color1=$nrColor1&color2=$nrColor2")
             ->setDescription("Level unrated!")
             ->setThumbnail($gldi)
             ->addField("Level", "**$levelName** by **$levelCreator**, Level ID **$levelID**")
