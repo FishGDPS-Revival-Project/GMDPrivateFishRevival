@@ -57,31 +57,29 @@ $query->execute([':filterID' => $filterID]);
 $result = $query->fetchAll();
 $visiblecount = $query->rowCount();
 
-session_start();
-$info = $_SESSION['info'];
 foreach($result as &$comment1) {
 	if($comment1["commentID"]!=""){
 		$uploadDate = date("d/m/Y G.i", $comment1["timestamp"]);
-        # role system
-        $query = $db->prepare("SELECT role FROM users WHERE userID=$comment1[userID]");
-        $query->execute();
-        $role = $query->fetchColumn();
-            
-        switch ($role) {
-            case 1: # MOD
-                $commentText = ($gameVersion < 20) ? base64_decode($comment1["comment"]) : $comment1["comment"];
-                $commentText = "<cy>$commentText</c>";
-                break;
-            case 2: # ADMIN
-                $commentText = ($gameVersion < 20) ? base64_decode($comment1["comment"]) : $comment1["comment"];
-                $commentText = "<cg>$commentText</c>";
-                break;
-            case 3: # OWNER
-                $commentText = ($gameVersion < 20) ? base64_decode($comment1["comment"]) : $comment1["comment"];
-                $commentText = "<cl>$commentText</c>";
-                break;
-        }
-        
+		# role system
+		$query = $db->prepare("SELECT role FROM users WHERE userID=$comment1[userID]");
+		$query->execute();
+		$role = $query->fetchColumn();
+
+		switch ($role) {
+		case 1: # MOD
+			$commentText = ($gameVersion < 20) ? base64_decode($comment1["comment"]) : $comment1["comment"];
+			$commentText = "<cy>$commentText</c>";
+			break;
+		case 2: # ADMIN
+			$commentText = ($gameVersion < 20) ? base64_decode($comment1["comment"]) : $comment1["comment"];
+			$commentText = "<cg>$commentText</c>";
+			break;
+		case 3: # OWNER
+			$commentText = ($gameVersion < 20) ? base64_decode($comment1["comment"]) : $comment1["comment"];
+			$commentText = "<cl>$commentText</c>";
+			break;
+		}
+
 
 		if($displayLevelID) $commentstring .= "1~".$comment1["levelID"]."~";
 		$commentstring .= "2~".$commentText."~3~".$comment1["userID"]."~4~".$comment1["likes"]."~5~0~7~".$comment1["isSpam"]."~9~".$uploadDate."~6~".$comment1["commentID"]."~10~".$comment1["percent"];
