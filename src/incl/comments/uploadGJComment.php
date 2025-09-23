@@ -31,16 +31,6 @@ if (Commands::doCommands($id, $decodecomment, $levelID)) {
 /**
  * *** block specific words	(automod) ***
  */
- // TODO: optimize code
- session_start();
-  $_SESSION['info'] = 0;
- if ($_SESSION['b'] = 1) {
- $_SESSION['b'] = 0;
- }
-if ($decodecomment = '!info') {
-    $_SESSION['info'] = 1;
-}
-
 if (str_contains($decodecomment, 'nigga')) {
   // array of random sentences to send
   $sentences = [

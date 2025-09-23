@@ -62,14 +62,6 @@ $info = $_SESSION['info'];
 foreach($result as &$comment1) {
 	if($comment1["commentID"]!=""){
 		$uploadDate = date("d/m/Y G.i", $comment1["timestamp"]);
-        if($info = 1 AND $_SESSION['b'] = 0) {
-               $commentText = "this is a test, and no, the comments are not replaced, it displays as this. $info $b";
-               $b = 1;
-               } 
-               if ($info = $info) {
-            $commentText = ($gameVersion < 20) ? base64_decode($comment1["comment"]) : $comment1["comment"];
-        } 
-
         # role system
         $query = $db->prepare("SELECT role FROM users WHERE userID=$comment1[userID]");
         $query->execute();
@@ -110,7 +102,7 @@ foreach($result as &$comment1) {
 }
 $commentstring = substr($commentstring, 0, -1);
 echo $commentstring;
-if($binaryVersion < 32 AND $decodecomment = '!info'){
+if($binaryVersion < 32){
 	$userstring = substr($userstring, 0, -1);
 	echo "#$userstring";
 }
