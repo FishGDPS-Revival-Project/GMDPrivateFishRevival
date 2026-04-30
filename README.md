@@ -1,8 +1,8 @@
 This project has been **archived**. There won't be any more updates to this repository due to FishGDPS shutting down.
 
-R.I.P FishGDPS, i guess (2025-2025)
+R.I.P FishGDPS, i guess (2025-2025) and hello FishGDPS Revival Project (2026)
 ------
-# FishGDPS' GMDPrivateServer
+# FishGDPS' GMDPrivateServer (Revival Project)
 
 ////////////////////////////////////////
 
