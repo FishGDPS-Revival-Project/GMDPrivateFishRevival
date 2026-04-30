@@ -41,6 +41,8 @@ Using this for the website - https://www.w3schools.com/w3css/default.asp (w3.css
 Nano56 for basically everything
 
 Test devices :
+
+
 -- Nox Emulator 7.0.6.2 -- x86
 
 
