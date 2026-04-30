@@ -39,3 +39,8 @@ Demon, auto, and star/feature/epic rating support in the rate tool by CirnoTheUw
 Using this for the website - https://www.w3schools.com/w3css/default.asp (w3.css)
 
 Nano56 for basically everything
+
+Test devices :
+-- Nox Emulator 7.0.6.2 -- x86
+-- Bluestacks 5 -- x86
+-- SM-T285 (Custom ROM 7.1.2) -- armeabi-v7a / armeabi
