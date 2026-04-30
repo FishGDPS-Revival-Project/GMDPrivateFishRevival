@@ -42,5 +42,9 @@ Nano56 for basically everything
 
 Test devices :
 -- Nox Emulator 7.0.6.2 -- x86
+
+
 -- Bluestacks 5 -- x86
+
+
 -- SM-T285 (Custom ROM 7.1.2) -- armeabi-v7a / armeabi
