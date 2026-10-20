@@ -13,7 +13,10 @@ RUN echo "DirectoryIndex index.php index.html" > /etc/apache2/conf-available/doc
 # 4. Copy everything from your db/ folder straight into the web root
 COPY db/ /var/www/html/
 
-# 5. FIX: Clean conflicting MPM links AND explicitly tell Apache to process PHP files before starting
-CMD bash -c "rm -f /etc/apache2/mods-enabled/mpm_event.* /etc/apache2/mods-enabled/mpm_worker.*; echo '<FilesMatch \.php$> \nSetHandler application/x-httpd-php \n</FilesMatch>' > /etc/apache2/conf-available/docker-php-handler.conf && a2enconf docker-php-handler; apache2-foreground"
+# 5. FIX: Ensure Apache loads the native pre-configured PHP module config
+RUN a2enmod php
+
+# 6. FIX: Run clean-up right at boot time and let the native handler boot up cleanly
+CMD bash -c "rm -f /etc/apache2/mods-enabled/mpm_event.* /etc/apache2/mods-enabled/mpm_worker.*; exec apache2-foreground"
 
 EXPOSE 80
