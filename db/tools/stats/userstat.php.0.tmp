@@ -1,0 +1,168 @@
+<?php include "../../incl/web/navbar.php"; ?>
+<div class="w3-container">
+<?php
+  include "../../incl/lib/connection.php";
+  include "../../incl/lib/mainLib.php";
+
+  $gs = new mainLib();
+
+      $userID = ($_GET["userID"]);
+      
+      # ** common items **
+      
+      # username
+      $query = $db->prepare("SELECT userName FROM users WHERE userID=$userID");
+      $query->execute();
+      $userName = $query->fetchColumn();
+      
+      # stars
+      $query = $db->prepare("SELECT stars FROM users WHERE userID=$userID");
+      $query->execute();
+      $stars = $query->fetchColumn();
+
+      # demons
+      $query = $db->prepare("SELECT demons FROM users WHERE userID=$userID");
+      $query->execute();
+      $demons = $query->fetchColumn();
+
+      # creator points
+      $query = $db->prepare("SELECT creatorPoints FROM users WHERE userID=$userID");
+      $query->execute();
+      $creatorPoints = $query->fetchColumn();
+      
+    # icons (from userid) (for rate webhook)
+    # credit to https://gdicon.oat.zone for rendering the icons
+
+    # icon
+    $query = $db->prepare("SELECT icon FROM users WHERE userID=$userID");
+    $query->execute();
+    $icon = $query->fetchColumn();
+
+    # color 1
+    $query = $db->prepare("SELECT color1 FROM users WHERE userID=$userID");
+    $query->execute();
+    $color1 = $query->fetchColumn();
+
+    # color 2
+    $query = $db->prepare("SELECT color2 FROM users WHERE userID=$userID");
+    $query->execute();
+    $color2 = $query->fetchColumn();
+      
+      # return stats to the user
+      echo "<h1><img height=\"48\" src=\"https://gdicon.oat.zone/icon.png?type=cube&value=$icon&color1=$color1&color2=$color2\"> $userName</h1>";
+
+      echo "<b>$stars</b>";
+
+
+      echo '<img height="15" src="https://cdn.discordapp.com/attachments/1370856507628851394/1402778590067687547/star_001.png?ex=689526de&is=6893d55e&hm=a99f2aa18257ac8dafa8c6f5a7d1ccc738d490ec534551448fc24a03a9c14525&">';
+
+
+      echo '<br>';
+      echo "<b>$demons</b>";
+
+      echo '<img height="15" src="https://cdn.discordapp.com/attachments/1370856507628851394/1402781576521191575/133_sin_titulo_20250806183302.png?ex=689529a6&is=6893d826&hm=05685ebffbb839a1f0303f6d8714d7710c206b9e1ba348d0875e8f63ec5f2708&">';
+if($creatorPoints > 0) {
+      echo '<br>';
+      echo "<b>$creatorPoints</b>";
+      echo '<img height="15" src="https://cdn.discordapp.com/attachments/1370856507628851394/1402794405160812566/sgfl38xxycta1.png?ex=68953598&is=6893e418&hm=eef70a15c17c21b0452bde6a258a2820276c295b3044b9bbb07e39ffe9d161a0&">';
+}
+
+    # lb banned
+    $query = $db->prepare("SELECT isLeaderboardBanned FROM users WHERE userID=$userID");
+    $query->execute();
+    $isLeaderboardBanned = $query->fetchColumn();
+    
+    # upload banned
+    $query = $db->prepare("SELECT isCreatorBanned FROM users WHERE userID=$userID");
+    $query->execute();
+    $isCreatorBanned = $query->fetchColumn();
+
+if ($isLeaderboardBanned == 1) {
+    echo "<br><br>";
+    echo "This user is <b>banned from the leaderboards</b>.";
+}
+if ($isCreatorBanned == 1) {
+    echo "<br><br>";
+    echo "This user is <b>banned from uploading levels</b>.";
+}
+
+?>
+
+<h1>Levels</h1>
+<div class="w3-responsive">
+<table class="w3-table w3-striped w3-bordered"><tr class="w3-blue"><th>#</th><th>Level Name</th><th>Likes</th><th>Level ID</th></tr>
+
+<?php
+
+// GET LEVELS
+$query = $db->prepare("SELECT levelName, likes, levelID FROM levels WHERE userID = $userID AND unlisted = 0 ORDER BY likes DESC");
+$query->execute();
+$levels = $query->fetchAll();
+
+$query = $db->prepare("SELECT COUNT(*) FROM levels WHERE userID = $userID AND unlisted = 0");
+$query->execute();
+$count = $query->fetchColumn();
+
+echo "<b>Levels: </b>";
+echo $count;
+
+$n = 0;
+
+
+
+// PRINT
+foreach($levels as &$row) {
+$n++;
+
+echo "<tr><td>$n</td><td>$row[levelName]</td><td>$row[likes]</td><td>$row[levelID]</td></tr>";
+
+}
+
+
+?>
+</table>
+</div>
+
+<h1>Comments</h1>
+<div class="w3-responsive">
+<table class="w3-table w3-striped w3-bordered"><tr class="w3-blue"><th>#</th><th>Level Name</th><th>Likes</th><th>Comment</th></tr>
+<?php
+
+// GET COMMENTS
+$query = $db->prepare("SELECT levelID, likes, comment FROM comments WHERE userID = $userID ORDER BY likes DESC LIMIT 50");
+$query->execute();
+$comments = $query->fetchAll();
+
+$query = $db->prepare("SELECT COUNT(*) FROM comments WHERE userID = $userID");
+$query->execute();
+$count = $query->fetchColumn();
+
+echo "<b>Comments: </b>";
+echo $count;
+
+$comment = 'comment';
+$levelID = 'levelID';
+
+$n = 0;
+
+// STUFFFF
+foreach($comments as &$row) {
+
+$query = $db->prepare("SELECT levelName FROM levels WHERE levelID = $row[$levelID]");
+$query->execute();
+
+$row[$levelID] = $query->fetchColumn();
+
+
+$row[$comment] = base64_decode($row[$comment]);
+
+$n++;
+
+echo "<tr><td>$n</td><td>$row[levelID]</td><td>$row[likes]</td><td>$row[comment]</td></tr>";
+
+}
+
+?>
+</table>
+<a href="https://system32.141412.xyz/db/tools/stats/leaderboard.php" class="w3-button w3-blue"><< Back</a>
+</div>

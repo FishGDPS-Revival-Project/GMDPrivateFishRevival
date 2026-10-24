@@ -1,0 +1,24 @@
+<?php
+include "../../incl/web/navbar.php";
+?>
+<div class="w3-container">
+<h1>Most disliked levels</h1>
+<div class="w3-responsive">
+<table class="w3-table w3-striped w3-bordered"><tr class="w3-blue"><th>#</th><th>Commenter</th><th>Comment</th><th>Likes</th><th>ID</th></tr>
+<?php
+include "../../incl/lib/connection.php";
+$query = $db->prepare("SELECT * FROM comments ORDER BY likes ASC LIMIT 100");
+$query->execute();
+$result = $query->fetchAll();
+foreach($result as $row) {
+base64_encode($row['comments']);
+}
+$x = 0;
+foreach($result as &$gain){
+	$x++;
+	echo "<tr><td>$x</td><td>${gain['userName']}</td><td>${gain['comment']}</td><td>${gain['likes']}</td><td>${gain['commentID']}</td></tr>";
+}
+?>
+</table>
+<a href="https://system32.141412.xyz/db/tools/stats/levelCountStats.php" class="w3-button w3-blue"><< Back</a>
+</div>
