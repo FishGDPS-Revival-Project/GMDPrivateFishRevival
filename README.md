@@ -38,7 +38,7 @@ Demon, auto, and star/feature/epic rating support in the rate tool by CirnoTheUw
 
 Using this for the website - https://www.w3schools.com/w3css/default.asp (w3.css)
 
-Nano56 for basically everything
+Nano56 for basically everything (or endemanset, pls mention me pls)
 
 Test devices :
 
