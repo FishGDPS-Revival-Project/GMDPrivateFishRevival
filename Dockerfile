@@ -21,11 +21,18 @@ RUN echo 'server { \
     } \
 }' > /etc/nginx/sites-available/default
 
-# 3. Copy your clean server files directly into the web root folder
+# 3. FIX: Force Nginx to run directly as root and fix temporary folder permissions
+RUN sed -i 's/user www-data;/user root;/' /etc/nginx/nginx.conf \
+    && chown -R root:root /var/lib/nginx /var/log/nginx
+
+# 4. Copy your clean server files directly into the web root folder
 COPY db/ /var/www/html/
 
-# 4. Create an internal startup script to force boot BOTH FPM and Nginx smoothly
-RUN echo '#!/bin/sh\nphp-fpm -D\nexec nginx -g "daemon off;"' > /entrypoint.sh \
+# 5. FIX: Force PHP-FPM to allow running as root without user switching
+RUN echo "user = root\ngroup = root" >> /usr/local/etc/php-fpm.d/www.conf
+
+# 6. Create an internal startup script to force boot BOTH FPM (as root) and Nginx smoothly
+RUN echo '#!/bin/sh\nphp-fpm -R -D\nexec nginx -g "daemon off;"' > /entrypoint.sh \
     && chmod +x /entrypoint.sh
 
 EXPOSE 80
